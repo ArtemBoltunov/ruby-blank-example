@@ -21,25 +21,25 @@ default: &default
 
 development:
   <<: *default
-  database: ruby_blank_example_development
+  database: <%= Rails.application.credentials.dig(:db, :database) %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: ruby_blank_example
+  username: <%= Rails.application.credentials.dig(:db, :username) %>
 
   # The password associated with the PostgreSQL role (username).
-  #password:
+  password: <%= Rails.application.credentials.dig(:db, :password) %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  host: <%= Rails.application.credentials.dig(:db, :host) %>
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  #port: 5432
+  port: <%= Rails.application.credentials.dig(:db, :port) %>
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
