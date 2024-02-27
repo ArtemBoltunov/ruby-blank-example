@@ -6,6 +6,7 @@
   - Вводим "Rails" Выбираем "Ruby on Rails & Postgres"
   - Выбираем Create Dev Container и пишем название, по умолчанию "ruby-rails-postgres"
   - Ждём завершения установки, можно открыть логи через терминал
+    - Потом лучше сделать так: `sudo chown -R vscode:vscode /usr/local/lib/ruby`
 
 ### Создаём репозиторий
 - Открываем Github и создаём репозиторий https://github.com/new (без создания `.gitignore`)
