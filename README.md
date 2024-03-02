@@ -6,6 +6,8 @@
   - Вводим "Rails" Выбираем "Ruby on Rails & Postgres"
   - Выбираем Create Dev Container и пишем название, по умолчанию "ruby-rails-postgres"
   - Ждём завершения установки, можно открыть логи через терминал
+    - Даем права в папку с будущими GEMами: `sudo chown -R vscode:vscode /usr/local/lib/ruby`
+    - Установливаем NodeJS: `nvm install` (можно выбрать версию)
 
 ### Создаём репозиторий
 - Открываем Github и создаём репозиторий https://github.com/new (без создания `.gitignore`)
@@ -22,10 +24,19 @@
 
 ### Создаём проект
 - Переходим в склонированную дирректорию `cd ruby-blank-example`
-- Выполняем команду `rails new . -d postgresql -j webpack --webpack=vue -c bootstrap -T`
+- Выполняем команду `rails new . -d postgresql -j vue -c bootstrap -T`
   - `-d postgresql` конфигурация для БД, можно выбрать (mysql/trilogy/postgresql/sqlite3/oracle/sqlserver/jdbcmysql/jdbcsqlite3/jdbcpostgresql/jdbc)
-  - `-j webpack` использовать Webpacker вместо стандартного системного ассет-пайплайна для управления фронтенд-ресурсами
-  - `--webpack=vue` интеграция компонентов vue
+  - `-j vue` устанавливает `jsbundling` (используется вместо `webpacker` начиная с Rails 7) с поддержкой vue
   - `-c bootstrap` добавление стилей Bootstrap
   - `-T` пропускаем генерацию файлов для Unit тестов с использованием Test::Unit. (установим позже gem 'rspec-rails')
   - Для разбора других опций создания проекта можно выполнить `rails new --help`
+
+### Настраиваем подключение к БД
+  - Выполняем `EDITOR="nano" rails credentials:edit` для добавления данных для подключения к БД `config/credentials.yml.enc` (шифрованый AES (Advanced Encryption Standard))
+  - Надёжно храним файл `config/master.key`, он используется для расшифровки
+
+### Добавляем gem для понятных unit тестов
+  - Добавляем в `Gemfile` в группы `:development` и `:test` запись `gem "rspec-rails", "~> 6.1.1"` (с актуальной версией)
+    - Можно например выполнить `bundle add rspec-rails`, а затем вручную переместить.
+  - Выполняем `bundle install` - установка зависимостей
+  - Выполнеем `rails g rspec:install` - генерация структуры файлов для unit тестов
