@@ -1,0 +1,8 @@
+<h1>Customers#home</h1>
+<p>Find me in app/views/customers/home.html.erb</p>
+
+<% if customer_signed_in? %>
+  <%= link_to "Выход", destroy_customer_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "Вход", new_customer_session_path %>
+<% end %>
